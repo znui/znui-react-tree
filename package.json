@@ -1,0 +1,34 @@
+{
+  "name": "znui-react-tree",
+  "version": "1.0.1",
+  "description": "Web tree component.",
+  "main": "development.js",
+  "scripts": {
+    "webpack-example": "rimraf example/dist && webpack --config webpack.config.example.js",
+    "webpack-example-watch": "rimraf example/dist && webpack --config webpack.config.example.js --watch",
+    "clean-dist": "rimraf dist",
+    "clean-build": "rimraf build",
+    "webpack": "rimraf dist && webpack",
+    "build": "npm run clean-build && babel src -d build",
+    "build-watch": "npm run clean-build && babel src -d build --watch",
+    "dist": "npm run clean-dist && webpack --uglify",
+    "dist-watch": "npm run clean-dist && webpack --uglify --watch",
+    "release": "npm run build && npm run dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/znui/znui-react-tree.git"
+  },
+  "keywords": [
+    "web component",
+    "tree"
+  ],
+  "author": "yangyxu",
+  "email": "xuyy0618@qq.com",
+  "license": "MIT",
+  "dependencies": {
+    "znui-react": "latest",
+    "znui-react-icon": "latest",
+    "znui-react-loader": "latest"
+  }
+}
