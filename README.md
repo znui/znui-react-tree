@@ -1,37 +1,171 @@
-## Welcome to GitHub Pages
+# znui-react-tree
+React tree Component
 
-You can use the [editor on GitHub](https://github.com/znui/znui-react-tree/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+[![npm](https://img.shields.io/npm/v/znui-react-tree.svg)](https://www.npmjs.com/package/znui-react-tree)
+[![npm](https://img.shields.io/npm/dm/znui-react-tree.svg)](https://www.npmjs.com/package/znui-react-tree)
 
-### Markdown
+## Demo
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[Take a look at the demo](https://znui.github.io/znui-react-tree/example/www/index.html)
 
-```markdown
-Syntax highlighted code block
+## Installation
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```bash
+npm install znui-react-tree -s
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
 
-### Jekyll Themes
+```javascript
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/znui/znui-react-tree/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+var ReactDOM = require('react-dom');
+var tree = require('znui-react-tree');
 
-### Support or Contact
+var _data = [
+    {
+        id: 1,
+        label: 'A',
+        data: [
+            {
+                id: 11,
+                label: 'AB1',
+                data: [
+                    {
+                        id: 111,
+                        label: 'ABB1'
+                    },
+                    {
+                        id: 112,
+                        label: 'ABB2'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                label: 'AC1',
+            },
+            {
+                id: 13,
+                label: 'AD1',
+            },
+            {
+                id: 12,
+                label: 'AC1',
+            },
+            {
+                id: 13,
+                label: 'AD1',
+            },
+            {
+                id: 12,
+                label: 'AC1',
+            },
+            {
+                id: 13,
+                label: 'AD1',
+            }
+        ]
+    },
+    {
+        id: 2,
+        label: 'B',
+        data: [
+            {
+                id: 11,
+                label: 'AB1',
+                data: [
+                    {
+                        id: 111,
+                        label: 'ABB1'
+                    },
+                    {
+                        id: 112,
+                        label: 'ABB2'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                label: 'AC12',
+            },
+            {
+                id: 13,
+                label: 'AD13',
+            }
+        ]
+    },
+    {
+        id: 3,
+        label: 'C',
+        data: [
+            {
+                id: 11,
+                label: '3AB1',
+                data: [
+                    {
+                        id: 111,
+                        label: 'ABB1'
+                    },
+                    {
+                        id: 112,
+                        label: 'ABB2'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                label: '3AC1',
+            },
+            {
+                id: 13,
+                label: '3AD1',
+            }
+        ]
+    },
+    {
+        id: 4,
+        label: 'D',
+        data: [
+            {
+                id: 11,
+                label: '4AB1',
+                data: [
+                    {
+                        id: 111,
+                        label: 'ABB1'
+                    },
+                    {
+                        id: 112,
+                        label: 'ABB2'
+                    }
+                ]
+            },
+            {
+                id: 12,
+                label: '4AC1',
+            },
+            {
+                id: 13,
+                label: '4AD1',
+            }
+        ]
+    }
+]
+ReactDOM.render(
+    <div style={{width: 1000, border: '1px solid #CCC'}}>
+        <tree.Tree data={_data} onItemClick={(event, owner)=>console.log(owner)} />
+        <tree.AccordionTree style={{margin: 50}} data={_data} onItemClick={(event, owner)=>console.log(owner)} />
+    </div>,
+    document.getElementById('container'),
+);
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```
+
+## Preiview
+
+<img src="https://znui.github.io/znui-react-tree/example/images/tree.png" />
+
+## License
+
+MIT

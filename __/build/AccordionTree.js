@@ -36,7 +36,7 @@ var Tree = React.createClass({
     var _this = this;
 
     item.index = index;
-    return React.createElement(AccordionTreeItem, {
+    return /*#__PURE__*/React.createElement(AccordionTreeItem, {
       parent: this,
       item: item,
       onClick: function onClick(event, owner) {
@@ -56,22 +56,22 @@ var Tree = React.createClass({
     });
   },
   render: function render() {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: znui.react.classname("zr-accordion-tree", this.props.className),
       style: this.props.style
-    }, React.createElement("ul", {
+    }, /*#__PURE__*/React.createElement("ul", {
       className: "data-view"
-    }, React.createElement(znui.react.DataView, {
+    }, /*#__PURE__*/React.createElement(znui.react.DataView, {
       data: this.props.data,
       itemRender: this.__itemRender,
       onLoading: this.__onLoading,
       onFinished: this.__onFinished
-    }), this.state.loading && React.createElement(loader.Loader, {
+    }), this.state.loading && /*#__PURE__*/React.createElement(loader.Loader, {
       content: "...",
       loader: "circle",
       size: "size-smail",
       layout: "flex-row"
-    })), this.state.data && React.createElement(Tree, {
+    })), this.state.data && /*#__PURE__*/React.createElement(Tree, {
       key: this.state.selectedIndex,
       root: this.props.root || this,
       data: this.state.data,

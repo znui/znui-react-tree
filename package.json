@@ -1,19 +1,21 @@
 {
   "name": "znui-react-tree",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "Web tree component.",
-  "main": "development.js",
+  "main": "index.js",
   "scripts": {
-    "webpack-example": "rimraf example/dist && webpack --config webpack.config.example.js",
-    "webpack-example-watch": "rimraf example/dist && webpack --config webpack.config.example.js --watch",
-    "clean-dist": "rimraf dist",
-    "clean-build": "rimraf build",
-    "webpack": "rimraf dist && webpack",
-    "build": "npm run clean-build && babel src -d build",
-    "build-watch": "npm run clean-build && babel src -d build --watch",
-    "dist": "npm run clean-dist && webpack --uglify",
-    "dist-watch": "npm run clean-dist && webpack --uglify --watch",
-    "release": "npm run build && npm run dist"
+    "clean-example": "rimraf ./example/www",
+    "clean-exports": "rimraf ./__/build/ && rimraf ./__/dist/",
+    "zr.start": "rimraf ./example/www && webpack-dev-server --config ./example/development.js --znui-react.path ../../ --watch",
+    "zr.example": "rimraf ./example/www && webpack --config ./example/production.js --znui-react.path ../../",
+    "zr.prod.dist": "rimraf ./__/dist/production && webpack --config ./__/production.js --znui-react.path ../../ --uglify",
+    "zr.prod.dist.watch": "rimraf ./__/dist/production && webpack --config ./__/production.js --znui-react.path ../../  --uglify --watch",
+    "zr.prod.build": "rimraf ./__/build && babel src -d __/build/",
+    "zr.prod.build.watch": "rimraf ./__/build && babel src -d __/build/ --watch",
+    "zr.dev.dist": "rimraf ./__/dist/development && webpack --config ./__/development.js --znui-react.path ../../",
+    "zr.dev.dist.watch": "rimraf ./__/dist/development && webpack --config ./__/development.js --znui-react.path ../../ --watch",
+    "zr.release": "npm run zr.prod.build && npm run zr.prod.dist && npm run zr.dev.dist",
+    "zr.release.watch": "npm run zr.prod.build.watch && npm run zr.prod.dist.watch && npm run zr.dev.dist.watch"
   },
   "repository": {
     "type": "git",

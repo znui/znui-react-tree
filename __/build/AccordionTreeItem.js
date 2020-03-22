@@ -40,7 +40,7 @@ module.exports = React.createClass({
   },
   __renderNav: function __renderNav() {
     if (this.props.item.data) {
-      return React.createElement(SVGIcon, {
+      return /*#__PURE__*/React.createElement(SVGIcon, {
         onClick: this.__onIconClick,
         icon: this.state.data ? "faCaretDown" : "faCaretRight"
       });
@@ -56,15 +56,15 @@ module.exports = React.createClass({
       return _element;
     }
 
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: "item-label"
-    }, React.createElement("span", null, this.props.item.label));
+    }, /*#__PURE__*/React.createElement("span", null, this.props.item.label));
   },
   __click: function __click(event) {
     this.props.onClick && this.props.onClick(event, this);
   },
   render: function render() {
-    return React.createElement("li", {
+    return /*#__PURE__*/React.createElement("li", {
       className: znui.react.classname("zr-accordion-tree-item", this.props.className),
       style: this.props.style,
       "data-selected": this.state.selected,

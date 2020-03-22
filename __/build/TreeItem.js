@@ -54,20 +54,20 @@ module.exports = React.createClass({
   },
   __renderIcon: function __renderIcon() {
     if (this.state.loading) {
-      return React.createElement("i", {
+      return /*#__PURE__*/React.createElement("i", {
         className: "loading"
       });
     }
 
     if (this.props.item.data) {
-      return React.createElement(SVGIcon, {
+      return /*#__PURE__*/React.createElement(SVGIcon, {
         onClick: this.__onIconClick,
         icon: this.state.data ? "faCaretDown" : "faCaretRight"
       });
     }
   },
   __renderNav: function __renderNav() {
-    return React.createElement("span", {
+    return /*#__PURE__*/React.createElement("span", {
       className: "item-nav",
       style: {
         width: this.props.depth * 20 + 'px'
@@ -84,12 +84,12 @@ module.exports = React.createClass({
       return _element;
     }
 
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: "item-label"
-    }, React.createElement("span", null, this.props.item.label));
+    }, /*#__PURE__*/React.createElement("span", null, this.props.item.label));
   },
   __render: function __render() {
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       className: "tree-item",
       onClick: this.__click
     }, this.__renderNav(), this.__renderLabel());
@@ -114,7 +114,7 @@ module.exports = React.createClass({
     if (this.state.data) {
       var Tree = require('./Tree');
 
-      return React.createElement(Tree, {
+      return /*#__PURE__*/React.createElement(Tree, {
         root: this.props.root,
         data: this.state.data,
         depth: this.props.depth + 1,
@@ -125,7 +125,7 @@ module.exports = React.createClass({
     return null;
   },
   render: function render() {
-    return React.createElement("li", {
+    return /*#__PURE__*/React.createElement("li", {
       className: znui.react.classname("zr-tree-item", this.props.className),
       style: this.props.style,
       "data-selected": this.state.selected

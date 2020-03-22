@@ -1,10 +1,8 @@
-
 require('znui-react');
-require('../src/index.less');
+require('../../src/index.less');
 require('./index.less');
-var React = require('react');
-var ReactDOM = require('react-dom');
-var tree = require('../src/index.js');
+var React = znui.React || require('react');
+var tree = require('../../src/index');
 var _data = [
     {
         id: 1,
@@ -134,12 +132,10 @@ var _data = [
             }
         ]
     }
-]
-ReactDOM.render(
-    <div style={{width: 1000, border: '1px solid #CCC'}}>
+];
+znui.react.createApplication({
+    render: <div style={{width: 1000, border: '1px solid #CCC'}}>
         <tree.Tree data={_data} onItemClick={(event, owner)=>console.log(owner)} />
         <tree.AccordionTree style={{margin: 50}} data={_data} onItemClick={(event, owner)=>console.log(owner)} />
-    </div>,
-    document.getElementById('container'),
-);
-
+    </div>
+});

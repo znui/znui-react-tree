@@ -19,7 +19,7 @@ module.exports = React.createClass({
   },
   __itemRender: function __itemRender(item, index) {
     item.index = index;
-    return React.createElement(TreeItem, {
+    return /*#__PURE__*/React.createElement(TreeItem, {
       root: this.props.root || this,
       item: item,
       depth: this.props.depth || 1,
@@ -38,15 +38,15 @@ module.exports = React.createClass({
     });
   },
   render: function render() {
-    return React.createElement("ul", {
+    return /*#__PURE__*/React.createElement("ul", {
       className: znui.react.classname("zr-tree", this.props.className),
       style: this.props.style
-    }, React.createElement(znui.react.DataView, {
+    }, /*#__PURE__*/React.createElement(znui.react.DataView, {
       data: this.props.data,
       itemRender: this.__itemRender,
       onLoading: this.__onLoading,
       onFinished: this.__onFinished
-    }), this.state.loading && React.createElement(loader.Loader, {
+    }), this.state.loading && /*#__PURE__*/React.createElement(loader.Loader, {
       content: "...",
       loader: "circle",
       size: "size-smail",
