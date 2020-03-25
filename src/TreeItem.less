@@ -1,11 +1,15 @@
 .zr-tree-item{
     //nth-child: odd, even
     background-color: #f3efef;
+    cursor: pointer;
     
     &[data-selected="true"]{
         &>.tree-item {
             background-color: #0ea7ec !important;
             color: #fff !important;
+        }
+        .loading{
+            background-color: #FFF !important;
         }
     }
     &:nth-child(odd){

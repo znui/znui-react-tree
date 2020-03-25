@@ -4,8 +4,6 @@ var React = znui.React || require('react');
 
 var AccordionTreeItem = require('./AccordionTreeItem');
 
-var loader = require('znui-react-loader');
-
 var Tree = React.createClass({
   displayName: 'ZRAccordionTree',
   getInitialState: function getInitialState() {
@@ -66,12 +64,13 @@ var Tree = React.createClass({
       itemRender: this.__itemRender,
       onLoading: this.__onLoading,
       onFinished: this.__onFinished
-    }), this.state.loading && /*#__PURE__*/React.createElement(loader.Loader, {
-      content: "...",
-      loader: "circle",
-      size: "size-smail",
-      layout: "flex-row"
-    })), this.state.data && /*#__PURE__*/React.createElement(Tree, {
+    }), this.state.loading && /*#__PURE__*/React.createElement("li", {
+      className: "zr-tree-list-loader"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "loader"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "text"
+    }, "Loading ..."))), this.state.data && /*#__PURE__*/React.createElement(Tree, {
       key: this.state.selectedIndex,
       root: this.props.root || this,
       data: this.state.data,

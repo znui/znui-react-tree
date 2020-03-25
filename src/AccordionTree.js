@@ -1,6 +1,5 @@
 var React = znui.React || require('react');
 var AccordionTreeItem = require('./AccordionTreeItem');
-var loader = require('znui-react-loader');
 
 var Tree = React.createClass({
 	displayName:'ZRAccordionTree',
@@ -42,7 +41,7 @@ var Tree = React.createClass({
 			<div className={znui.react.classname("zr-accordion-tree", this.props.className)} style={this.props.style}>
 				<ul className="data-view">
 					<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} onLoading={this.__onLoading} onFinished={this.__onFinished} />
-					{this.state.loading && <loader.Loader content="..." loader="circle" size="size-smail" layout="flex-row" />}
+					{this.state.loading && <li className="zr-tree-list-loader"><span className="loader" /><span className="text">Loading ...</span></li>}
 				</ul>
 				{
 					this.state.data && <Tree key={this.state.selectedIndex} root={this.props.root || this} data={this.state.data} onItemClick={this.__clickItem} />

@@ -1,4 +1,3 @@
-require('znui-react');
 module.exports = {
     Tree: require('./Tree'),
     TreeItem: require('./TreeItem'),

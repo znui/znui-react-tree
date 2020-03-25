@@ -5,9 +5,9 @@ if(process && process.env && process.env.NODE_ENV) {
         module.exports = require('./__/build/index.js');
     }else{
         require('./__/dist/production/index.style.bundle.css');
-        module.exports = require('./__/build/index.js');
+        module.exports = require('./__/dist/production/index.bundle.js');
     }
 }else {
     require('./__/dist/production/index.style.bundle.css');
-    module.exports = require('./__/build/index.js');
+    module.exports = require('./__/dist/production/index.bundle.js');
 }

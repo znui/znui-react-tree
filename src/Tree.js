@@ -1,6 +1,5 @@
 var React = znui.React || require('react');
 var TreeItem = require('./TreeItem');
-var loader = require('znui-react-loader');
 
 module.exports = React.createClass({
 	displayName:'ZRTree',
@@ -31,7 +30,7 @@ module.exports = React.createClass({
 		return (
 			<ul className={znui.react.classname("zr-tree", this.props.className)} style={this.props.style}>
 				<znui.react.DataView data={this.props.data} itemRender={this.__itemRender} onLoading={this.__onLoading} onFinished={this.__onFinished} />
-				{this.state.loading && <loader.Loader content="..." loader="circle" size="size-smail" layout="flex-row" />}
+				{this.state.loading && <li className="zr-tree-list-loader"><span className="loader" /><span className="text">Loading ...</span></li>}
 			</ul>
 		);
 	}

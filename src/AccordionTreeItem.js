@@ -1,5 +1,4 @@
 var React = znui.React || require('react');
-var SVGIcon = require('znui-react-icon').SVGIcon;
 
 module.exports = React.createClass({
 	displayName: 'ZRAccordionTreeItem',
@@ -32,7 +31,10 @@ module.exports = React.createClass({
 	},
 	__renderNav: function (){
 		if(this.props.item.data){
-			return <SVGIcon onClick={this.__onIconClick} icon={this.state.data?"faCaretDown":"faCaretRight"} />;
+			var _path = 'M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z';
+			return <svg onClick={this.__onIconClick} aria-hidden="true" focusable="false" className="svg-inline--fa fa-caret-right fa-w-6 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+				<path fill="currentColor" d={_path}></path>
+			</svg>;
 		}
 	},
 	__renderLabel: function (){
