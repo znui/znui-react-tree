@@ -47,7 +47,7 @@ module.exports = React.createClass({
 		}
 
 		return <div className="item-label">
-			<span>{this.props.item.label}</span>
+			<span>{this.props.item[this.props.labelKey || 'label']}</span>
 		</div>;
 	},
 	__click: function (event){

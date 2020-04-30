@@ -65,7 +65,7 @@ module.exports = React.createClass({
 
     return /*#__PURE__*/React.createElement("div", {
       className: "item-label"
-    }, /*#__PURE__*/React.createElement("span", null, this.props.item.label));
+    }, /*#__PURE__*/React.createElement("span", null, this.props.item[this.props.labelKey || 'label']));
   },
   __click: function __click(event) {
     this.props.onClick && this.props.onClick(event, this);

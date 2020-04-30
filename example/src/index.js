@@ -3,6 +3,7 @@ require('../../src/index.less');
 require('./index.less');
 var React = znui.React || require('react');
 var tree = require('../../src/index');
+var Tree = require('./Tree');
 var _data = [
     {
         id: 1,
@@ -137,5 +138,6 @@ znui.react.createApplication({
     render: <div style={{width: 1000, border: '1px solid #CCC'}}>
         <tree.Tree data={_data} onItemClick={(event, owner)=>console.log(owner)} />
         <tree.AccordionTree style={{margin: 50}} data={_data} onItemClick={(event, owner)=>console.log(owner)} />
+        <Tree />
     </div>
 });

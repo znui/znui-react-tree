@@ -120,17 +120,26 @@
 .zr-accordion-tree {
   display: flex;
   flex-direction: row;
+  margin-left: -1px;
+  overflow: auto;
 }
 .zr-accordion-tree .data-view {
   position: relative;
   width: 200px;
-  list-style-type: none;
+}
+.zr-accordion-tree .data-view .data-list {
+  height: fit-content;
   padding: 0px;
   margin: 0px;
-  margin-left: -1px;
-  height: fit-content;
+  list-style-type: none;
   border-top: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
+}
+.zr-accordion-tree .data-view .no-data {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f5efef;
+  padding: 10px;
 }
 .zr-accordion-tree-item {
   display: flex;
@@ -147,8 +156,9 @@
     }*/
 }
 .zr-accordion-tree-item[data-selected="true"] {
-  background-color: #0ea7ec !important;
-  color: #fff !important;
+  background-color: #d8d0d0 !important;
+  color: #3a3838 !important;
+  font-weight: bold;
 }
 .zr-accordion-tree-item:nth-child(odd) {
   background-color: #f9f9f9;

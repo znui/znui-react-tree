@@ -1,16 +1,26 @@
 .zr-accordion-tree{
     display: flex;
     flex-direction: row;
+    margin-left: -1px;
+    overflow: auto;
     
     .data-view{
         position: relative;
         width: 200px;
-        list-style-type: none;
-        padding: 0px;
-        margin: 0px;
-        margin-left: -1px;
-        height: fit-content;
-        border-top: 1px solid #cccccc;
-        border-left: 1px solid #cccccc;
+        
+        .data-list{
+            height: fit-content;
+            padding: 0px;
+            margin: 0px;
+            list-style-type: none;
+            border-top: 1px solid #cccccc;
+            border-left: 1px solid #cccccc;
+        }
+        .no-data{
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5efef;
+            padding: 10px;
+        }
     }
 }
