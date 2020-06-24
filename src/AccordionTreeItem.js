@@ -10,7 +10,7 @@ module.exports = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			selected: false
+			
 		}
 	},
 	__onIconClick: function (event){
@@ -45,9 +45,16 @@ module.exports = React.createClass({
 		if(_element) {
 			return _element;
 		}
+		var _labelKey = this.props.labelKey || 'label',
+			_label = '';
+		if(_labelKey.indexOf('{')!=-1 && _labelKey.indexOf('}')!=-1){
+			_label = _labelKey.toString().format(this.props.item);
+		}else{
+			_label = this.props.item[_labelKey];
+		}
 
 		return <div className="item-label">
-			<span>{this.props.item[this.props.labelKey || 'label']}</span>
+			<span>{_label}</span>
 		</div>;
 	},
 	__click: function (event){
@@ -57,7 +64,7 @@ module.exports = React.createClass({
 		return (
 			<li className={znui.react.classname("zr-accordion-tree-item", this.props.className)} 
 				style={this.props.style} 
-				data-selected={this.state.selected} onClick={this.__click} >
+				data-selected={this.props.selected} onClick={this.__click} >
 				{ this.__renderLabel() }
 				{ this.__renderNav() }
 			</li>

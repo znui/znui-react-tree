@@ -1,13 +1,20 @@
 .zr-accordion-tree{
-    display: flex;
-    flex-direction: row;
-    margin-left: -1px;
+    display: inline-flex;
+    margin-left: 1px;
     overflow: auto;
+
+    &.actived{
+        &>.data-view{
+            border-top-color: #f0ad4e !important;
+            border-radius: 3px;
+        }
+    }
     
-    .data-view{
+    &>.data-view{
         position: relative;
         width: 200px;
-        
+        min-width: 200px;  
+        border-top: 3px solid transparent; 
         .data-list{
             height: fit-content;
             padding: 0px;
@@ -15,12 +22,20 @@
             list-style-type: none;
             border-top: 1px solid #cccccc;
             border-left: 1px solid #cccccc;
+            border-radius: 3px;
+            &>li:first-child{
+                border-radius: 3px 3px 0px 0px;
+            }
+            &>li:last-child{
+                border-radius: 0px 0px 3px 3px;
+            }
         }
         .no-data{
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
             background-color: #f5efef;
-            padding: 10px;
+            padding: 5px;
+            margin: 3px;
         }
     }
 }

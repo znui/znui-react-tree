@@ -3,22 +3,36 @@ var AccordionTreeItem = require('./AccordionTreeItem');
 
 var Tree = React.createClass({
 	displayName:'ZRAccordionTree',
+	getDefaultProps: function (){
+		return {
+			itemKey: 'id'
+		}
+	},
 	getInitialState: function (){
 		return {
+			actived: false,
 			loading: true,
 			selected: null,
 			selectedIndex: 0,
-			data: null
+			data: null,
+			className: '',
+			style: {}
 		};
 	},
+	componentDidMount: function (){
+		this.props.onDidMount && this.props.onDidMount(this);
+	},
 	__itemClick: function (event, owner, item, index){
-		if(this.state.selected) {
-			this.state.selected.setState({ selected: false });
+		if(this.props.root){
+			if(this.props.root.__actived__) {
+				this.props.root.__actived__.setState({ actived: false });
+			}
+			this.props.root.__actived__ = this;
 		}
-		this.state.selected = owner;
+		this.__actived__ = this;
+		this.setState({ actived: true });
+		this.state.selected = item[this.props.itemKey];
 		this.state.selectedIndex = index;
-		this.state.selected.setState({ selected: true });
-		console.log(this.props);
 		var _return = this.props.onItemClick && this.props.onItemClick(event, owner, item, index, this);
 		if(_return !== false && item.data){
 			this.state.data = item.data;
@@ -27,10 +41,10 @@ var Tree = React.createClass({
 	},
 	__itemRender: function (item, index){
 		item.index = index;
-		console.log(this.__itemClick);
 		return <AccordionTreeItem key={index}
 			parent={this} 
 			item={item} 
+			selected={this.props.itemKey && item[this.props.itemKey] && item[this.props.itemKey]==this.state.selected}
 			labelKey={this.props.labelKey}
 			itemLabelRender={this.props.itemLabelRender}
 			onClick={(event, owner)=>this.__itemClick(event, owner, item, index)} />
@@ -67,20 +81,29 @@ var Tree = React.createClass({
 			);
 		}
 	},
-	refresh: function (){
+	refresh: function (argv, events, context){
 		if(this.data){
-			this.data.refresh();
+			this.data.refresh(argv, zn.extend({
+				after: function (response){
+					
+				}.bind(this)
+			}, events), context);
+		}
+	},
+	refreshChild: function (){
+		if(this.child){
+			this.child.refresh();
 		}
 	},
 	render: function(){
 		return (
-			<div className={znui.react.classname("zr-accordion-tree", this.props.className)} style={this.props.style}>
+			<div className={znui.react.classname("zr-accordion-tree", this.props.className, this.state.className, (this.state.actived?'actived':''))} style={znui.react.style(this.props.style, this.state.style)}>
 				<div className="data-view">
 					<znui.react.DataLifecycle responseHandler={this.props.responseHandler} onDataCreated={(data) => this.data = data } onLoading={this.__onLoading} onFinished={this.__onFinished} data={this.props.data} render={this.__render} />
 					{this.state.loading && <div className="zr-tree-list-loader"><span className="loader" /><span className="text">Loading ...</span></div>}
 				</div>
 				{
-					this.state.data && <Tree responseHandler={this.props.responseHandler} labelKey={this.props.labelKey} key={this.state.selectedIndex} root={this.props.root || this} data={this.state.data} onItemClick={this.props.onItemClick} />
+					this.state.data && <Tree onDidMount={(tree) => this.child = tree} responseHandler={this.props.responseHandler} labelKey={this.props.labelKey} key={this.state.selectedIndex} root={this.props.root || this} data={this.state.data} onItemClick={this.props.onItemClick} />
 				}
 			</div>
 		);

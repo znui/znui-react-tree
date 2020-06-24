@@ -11,9 +11,7 @@ module.exports = React.createClass({
     };
   },
   getInitialState: function getInitialState() {
-    return {
-      selected: false
-    };
+    return {};
   },
   __onIconClick: function __onIconClick(event) {
     var _this = this;
@@ -63,9 +61,18 @@ module.exports = React.createClass({
       return _element;
     }
 
+    var _labelKey = this.props.labelKey || 'label',
+        _label = '';
+
+    if (_labelKey.indexOf('{') != -1 && _labelKey.indexOf('}') != -1) {
+      _label = _labelKey.toString().format(this.props.item);
+    } else {
+      _label = this.props.item[_labelKey];
+    }
+
     return /*#__PURE__*/React.createElement("div", {
       className: "item-label"
-    }, /*#__PURE__*/React.createElement("span", null, this.props.item[this.props.labelKey || 'label']));
+    }, /*#__PURE__*/React.createElement("span", null, _label));
   },
   __click: function __click(event) {
     this.props.onClick && this.props.onClick(event, this);
@@ -74,7 +81,7 @@ module.exports = React.createClass({
     return /*#__PURE__*/React.createElement("li", {
       className: znui.react.classname("zr-accordion-tree-item", this.props.className),
       style: this.props.style,
-      "data-selected": this.state.selected,
+      "data-selected": this.props.selected,
       onClick: this.__click
     }, this.__renderLabel(), this.__renderNav());
   }
