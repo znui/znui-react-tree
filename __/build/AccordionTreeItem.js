@@ -11,7 +11,9 @@ module.exports = React.createClass({
     };
   },
   getInitialState: function getInitialState() {
-    return {};
+    return {
+      clicked: false
+    };
   },
   __onIconClick: function __onIconClick(event) {
     var _this = this;
@@ -35,7 +37,7 @@ module.exports = React.createClass({
     }, 1000);
   },
   __renderNav: function __renderNav() {
-    if (this.props.item.data) {
+    if (this.props.item && this.props.item.data) {
       var _path = 'M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z';
       return /*#__PURE__*/React.createElement("svg", {
         onClick: this.__onIconClick,
@@ -54,8 +56,9 @@ module.exports = React.createClass({
   __renderLabel: function __renderLabel() {
     var _element = znui.react.createReactElement(this.props.itemLabelRender, {
       data: this.props.item,
+      tree: this.props.parent,
       treeitem: this
-    });
+    }, this.props.context);
 
     if (_element) {
       return _element;
@@ -77,10 +80,16 @@ module.exports = React.createClass({
   __click: function __click(event) {
     this.props.onClick && this.props.onClick(event, this);
   },
+  setClicked: function setClicked(clicked) {
+    this.setState({
+      clicked: clicked
+    });
+  },
   render: function render() {
     return /*#__PURE__*/React.createElement("li", {
-      className: znui.react.classname("zr-accordion-tree-item", this.props.className),
       style: this.props.style,
+      className: znui.react.classname("zr-accordion-tree-item", this.props.className),
+      "data-clicked": this.state.clicked,
       "data-selected": this.props.selected,
       onClick: this.__click
     }, this.__renderLabel(), this.__renderNav());

@@ -6,15 +6,18 @@
     align-items: center;
     padding: 4px;
     border-bottom: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
+    /*border-right: 1px solid #cccccc;*/
     background-color: #f3efef;
     cursor: pointer;
+    &:last-child{
+        border-bottom: 0px solid transparent;
+    }
     
     &[data-selected="true"]{
         & {
-            background-color: #d8d0d0!important;
-            color: #3a3838!important;
-            font-weight: bold;
+            background-color: #f2f2f2!important;
+            color: #1a73e8!important;
+            font-weight: bolder;
         }
     }
     &:nth-child(odd){

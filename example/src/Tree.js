@@ -22,7 +22,7 @@ module.exports = React.createClass({
 				labelKey="child_name"
 				data={{
 					method: "get",
-					url: '',
+					url: 'xxx',
 					params: {
 						pageNum: 1,
 						pageSize: 1000,

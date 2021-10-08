@@ -1,6 +1,6 @@
 {
   "name": "znui-react-tree",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Web tree component.",
   "main": "index.js",
   "scripts": {

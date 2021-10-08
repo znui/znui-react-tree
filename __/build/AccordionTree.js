@@ -8,7 +8,7 @@ var Tree = React.createClass({
   displayName: 'ZRAccordionTree',
   getDefaultProps: function getDefaultProps() {
     return {
-      itemKey: 'id'
+      itemKey: 'zxnz_ID'
     };
   },
   getInitialState: function getInitialState() {
@@ -50,17 +50,30 @@ var Tree = React.createClass({
       this.forceUpdate();
     }
   },
-  __itemRender: function __itemRender(item, index) {
+  __itemRender: function __itemRender(item, index, data) {
     var _this = this;
 
     item.index = index;
+
+    var _element = znui.react.createReactElement(this.props.itemRender, {
+      item: item,
+      index: index,
+      tree: this
+    }, this.props.context);
+
+    if (_element) {
+      return _element;
+    }
+
     return /*#__PURE__*/React.createElement(AccordionTreeItem, {
       key: index,
       parent: this,
       item: item,
       selected: this.props.itemKey && item[this.props.itemKey] && item[this.props.itemKey] == this.state.selected,
       labelKey: this.props.labelKey,
-      itemLabelRender: this.props.itemLabelRender,
+      itemLabelRender: function itemLabelRender(value) {
+        return _this.props.itemLabelRender && _this.props.itemLabelRender(value, item, index, data);
+      },
       onClick: function onClick(event, owner) {
         return _this.__itemClick(event, owner, item, index);
       }
@@ -78,20 +91,58 @@ var Tree = React.createClass({
     return this.props.onDataLoaded && this.props.onDataLoaded(data);
   },
   __render: function __render(data) {
+    var _this2 = this;
+
     if (!data) {
       return null;
     }
 
+    if (data.code != 200) {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "no-data"
+      }, data.result.message || data.message);
+    }
+
+    data = data.result;
+
     if (data.length) {
       return /*#__PURE__*/React.createElement("ul", {
         className: "data-list"
-      }, data.map(function (item, index) {
-        return this.__itemRender(item, index);
-      }.bind(this)));
+      }, this.props.topRender && /*#__PURE__*/React.createElement(AccordionTreeItem, {
+        itemLabelRender: function itemLabelRender() {
+          return _this2.props.topRender(data, _this2);
+        }
+      }), data.map(function (item, index) {
+        return this.__itemRender(item, index, data);
+      }.bind(this)), this.props.bottomRender && /*#__PURE__*/React.createElement(AccordionTreeItem, {
+        itemLabelRender: function itemLabelRender() {
+          return _this2.props.bottomRender(data, _this2);
+        }
+      }));
     } else {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "no-data"
-      }, "No Data");
+      var _emptyContent = znui.react.createReactElement(this.props.emptyContentRender, this, this.props.context);
+
+      var _empty = znui.react.createReactElement(this.props.emptyRender, this, this.props.context);
+
+      if (!_emptyContent) {
+        _emptyContent = /*#__PURE__*/React.createElement("div", {
+          className: "no-data"
+        }, "\u6682\u65E0\u6570\u636E");
+      }
+
+      if (!_empty) {
+        _empty = /*#__PURE__*/React.createElement("ul", {
+          className: "data-list"
+        }, this.props.topRender && /*#__PURE__*/React.createElement(AccordionTreeItem, {
+          itemLabelRender: function itemLabelRender() {
+            return _this2.props.topRender(data, _this2);
+          }
+        }), /*#__PURE__*/React.createElement(AccordionTreeItem, {
+          itemLabelRender: _emptyContent
+        }));
+      }
+
+      return _empty;
     }
   },
   refresh: function refresh(argv, events, context) {
@@ -107,7 +158,7 @@ var Tree = React.createClass({
     }
   },
   render: function render() {
-    var _this2 = this;
+    var _this3 = this;
 
     return /*#__PURE__*/React.createElement("div", {
       className: znui.react.classname("zr-accordion-tree", this.props.className, this.state.className, this.state.actived ? 'actived' : ''),
@@ -117,7 +168,7 @@ var Tree = React.createClass({
     }, /*#__PURE__*/React.createElement(znui.react.DataLifecycle, {
       responseHandler: this.props.responseHandler,
       onDataCreated: function onDataCreated(data) {
-        return _this2.data = data;
+        return _this3.data = data;
       },
       onLoading: this.__onLoading,
       onFinished: this.__onFinished,
@@ -131,8 +182,13 @@ var Tree = React.createClass({
       className: "text"
     }, "Loading ..."))), this.state.data && /*#__PURE__*/React.createElement(Tree, {
       onDidMount: function onDidMount(tree) {
-        return _this2.child = tree;
+        return _this3.child = tree;
       },
+      topRender: this.props.topRender,
+      bottomRender: this.props.bottomRender,
+      itemLabelRender: this.props.itemLabelRender,
+      emptyRender: this.props.emptyRender,
+      emptyContentRender: this.props.emptyContentRender,
       responseHandler: this.props.responseHandler,
       labelKey: this.props.labelKey,
       key: this.state.selectedIndex,
